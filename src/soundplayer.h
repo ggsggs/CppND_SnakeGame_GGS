@@ -8,8 +8,8 @@
 #include <memory>
 #include <string>
 
-const std::string path_BackgroundSong{"../media/snake_jazz.wav"};
-const std::string path_GameOverSong{"../media/game_over_8bit.wav"};
+const std::string path_BackgroundSong{"../media/snake_jazz_compressed.wav"};
+const std::string path_GameOverSong{"../media/game_over_8bit_compressed.wav"};
 const std::string path_eatingChunk{"../media/success.wav"};
 const std::string path_collisionChunk{"../media/wrong_buzzer.wav"};
 
