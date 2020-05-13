@@ -39,7 +39,7 @@ In this project, you can build your own C++ application or extend this Snake gam
   - [x] Use smart pointers.
 - [ ] Add sounds to game.
   - [x] Add background music.
-  - [ ] Add food pick-up sound.
+  - [x] Add food pick-up sound.
   - [ ] Add collision sound.
   - [ ] Add Game-Over music.
 - [ ] Add background image.

@@ -20,8 +20,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   int frame_count = 0;
   bool running = true;
 
-  SoundPlayer soundPlayer;
-  soundPlayer.PlayBackgroundMusic();
+  _soundPlayer.PlayBackgroundMusic();
   while (running) {
     frame_start = SDL_GetTicks();
 
@@ -78,6 +77,7 @@ void Game::Update() {
 
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
+    _soundPlayer.PlayEatingChunk(); 
     score++;
     PlaceFood();
     // Grow snake and increase speed.

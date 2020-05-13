@@ -1,3 +1,6 @@
+#ifndef SOUNDPLAYER_H
+#define SOUNDPLAYER_H
+
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_mixer.h"
 #include "iostream"
@@ -7,6 +10,7 @@
 
 const std::string path_BackgroundSong{"../media/snake_jazz.wav"};
 const std::string path_GameOverSong{"../media/game_over.wav"};
+const std::string path_eatingChunk{"../media/success.wav"};
 
 class SoundPlayer{
  public:
@@ -14,6 +18,7 @@ class SoundPlayer{
   ~SoundPlayer();
   bool PlayBackgroundMusic();
   bool HaltBackgroundMusic();
+  void PlayEatingChunk();
 
  private:
   class Song{
@@ -32,11 +37,26 @@ class SoundPlayer{
           Mix_FreeMusic(m);
         }
       };
-
-    private:
       std::unique_ptr<Mix_Music, DestroyerMixMusic> _mix_music;
   };
-  Song _backgroundSong;
+  class Chunk{
+   public:
+    Chunk(std::string path);
+
+    void PlayChunk();
+
+   private:
+    struct DestroyerMixChunk{
+      void operator()(Mix_Chunk* c) const{
+        Mix_FreeChunk(c);
+      }
+    };
+    std::unique_ptr<Mix_Chunk, DestroyerMixChunk> _mix_chunk;
+  };
+
   static bool _isAudioInit;
+  Song _backgroundSong;
+  Chunk _eatingChunk;
 };
 
+#endif

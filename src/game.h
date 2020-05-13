@@ -6,6 +6,7 @@
 #include "controller.h"
 #include "renderer.h"
 #include "snake.h"
+#include "soundplayer.h"
 
 class Game {
  public:
@@ -18,6 +19,7 @@ class Game {
  private:
   Snake snake;
   SDL_Point food;
+  SoundPlayer _soundPlayer;
 
   std::random_device dev;
   std::mt19937 engine;
