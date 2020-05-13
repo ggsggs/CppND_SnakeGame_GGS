@@ -15,11 +15,11 @@ SoundPlayer::~SoundPlayer() {
   Mix_Quit();
 }
 
-bool SoundPlayer::PlayBackgroundMusic() {
+void SoundPlayer::PlayBackgroundMusic() {
   _backgroundSong.PlaySong();    
 }
 
-bool SoundPlayer::HaltBackgroundMusic() {
+void SoundPlayer::HaltBackgroundMusic() {
   _backgroundSong.HaltSong();
 }
 
@@ -38,7 +38,7 @@ SoundPlayer::Song::~Song() {
   HaltSong();
 }
 
-bool SoundPlayer::Song::PlaySong() {
+void SoundPlayer::Song::PlaySong() {
   if (Mix_PlayingMusic() == 0) {
     Mix_PlayMusic(_mix_music.get(), -1); // infinite loop
   }
@@ -47,15 +47,15 @@ bool SoundPlayer::Song::PlaySong() {
   }
 }
 
-bool SoundPlayer::Song::HaltSong() {
+void SoundPlayer::Song::HaltSong() {
   Mix_HaltMusic();  
 }
 
-bool SoundPlayer::Song::PauseSong() {
+void SoundPlayer::Song::PauseSong() {
   Mix_PauseMusic();
 }
 
-bool SoundPlayer::Song::ResumeSong() {
+void SoundPlayer::Song::ResumeSong() {
    if (Mix_PausedMusic() == 1) {
      Mix_ResumeMusic();
    } 

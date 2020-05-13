@@ -16,8 +16,8 @@ class SoundPlayer{
  public:
   SoundPlayer();
   ~SoundPlayer();
-  bool PlayBackgroundMusic();
-  bool HaltBackgroundMusic();
+  void PlayBackgroundMusic();
+  void HaltBackgroundMusic();
   void PlayEatingChunk();
 
  private:
@@ -26,10 +26,10 @@ class SoundPlayer{
       Song(std::string path);
       ~Song();
 
-      bool PlaySong();
-      bool HaltSong();
-      bool PauseSong();
-      bool ResumeSong();
+      void PlaySong();
+      void HaltSong();
+      void PauseSong();
+      void ResumeSong();
     
     private:
       struct DestroyerMixMusic{
