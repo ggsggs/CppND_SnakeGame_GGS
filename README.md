@@ -31,6 +31,7 @@ In this project, you can build your own C++ application or extend this Snake gam
 
 ## TODO
 
+- [x] Found and solved bug that caused food to stop appearing on screen.
 - [x] Remove hex colors from function calls
   - [x] Create color class
   - [x] Wrap SDL_SetRenderDrawColor
