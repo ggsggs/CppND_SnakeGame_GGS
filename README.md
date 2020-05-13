@@ -34,8 +34,8 @@ In this project, you can build your own C++ application or extend this Snake gam
   - [x] Create color class
   - [x] Wrap SDL_SetRenderDrawColor
   - [x] Create basic color palette.
-- [ ] Use modern C++.
-  - [ ] Use smart pointers.
+- [x] Use modern C++.
+  - [x] Use smart pointers.
 - [ ] Add background music.
 - [ ] Add food pick-up sound.
 - [ ] Add collision sound.
