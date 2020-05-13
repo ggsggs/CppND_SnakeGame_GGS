@@ -42,7 +42,7 @@ In this project, you can build your own C++ application or extend this Snake gam
   - [x] Add background music.
   - [x] Add food pick-up sound.
   - [x] Add collision sound.
-  - [ ] Add Game-Over music.
+  - [x] Add Game-Over music.
 - [ ] Add background image.
 - [ ] Add tail to snake.
 - [ ] Add food vanish functionality.

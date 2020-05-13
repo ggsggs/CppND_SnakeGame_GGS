@@ -6,7 +6,7 @@ bool SoundPlayer::_isAudioInit =
 
 SoundPlayer::SoundPlayer() : 
   _backgroundSong(path_BackgroundSong), _eatingChunk(path_eatingChunk),
-  _collisionChunk(path_collisionChunk) {
+  _collisionChunk(path_collisionChunk), _gameOverSong(path_GameOverSong) {
   if (!_isAudioInit) {
     printf("Error initializing SDL2_mixer: %s\n", Mix_GetError());
   }
@@ -17,11 +17,21 @@ SoundPlayer::~SoundPlayer() {
 }
 
 void SoundPlayer::PlayBackgroundMusic() {
+  HaltGameOverMusic();
   _backgroundSong.PlaySong();    
 }
 
 void SoundPlayer::HaltBackgroundMusic() {
   _backgroundSong.HaltSong();
+}
+
+void SoundPlayer::PlayGameOverMusic(){
+  HaltBackgroundMusic();
+  _gameOverSong.PlaySong();
+}
+
+void SoundPlayer::HaltGameOverMusic(){
+  _gameOverSong.HaltSong();
 }
 
 void SoundPlayer::PlayEatingChunk() {

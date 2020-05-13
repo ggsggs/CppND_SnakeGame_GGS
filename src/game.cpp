@@ -73,6 +73,7 @@ void Game::Update() {
   if (!snake.alive){
     if (noCollision) {
       _soundPlayer.PlayCollisionChunk();
+      _soundPlayer.PlayGameOverMusic();
       noCollision = false;
     }
     return;

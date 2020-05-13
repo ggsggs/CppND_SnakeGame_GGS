@@ -9,7 +9,7 @@
 #include <string>
 
 const std::string path_BackgroundSong{"../media/snake_jazz.wav"};
-const std::string path_GameOverSong{"../media/game_over.wav"};
+const std::string path_GameOverSong{"../media/game_over_8bit.wav"};
 const std::string path_eatingChunk{"../media/success.wav"};
 const std::string path_collisionChunk{"../media/wrong_buzzer.wav"};
 
@@ -19,6 +19,8 @@ class SoundPlayer{
   ~SoundPlayer();
   void PlayBackgroundMusic();
   void HaltBackgroundMusic();
+  void PlayGameOverMusic();
+  void HaltGameOverMusic();
   void PlayEatingChunk();
   void PlayCollisionChunk();
 
@@ -58,8 +60,10 @@ class SoundPlayer{
 
   static bool _isAudioInit;
   Song _backgroundSong;
+  Song _gameOverSong;
   Chunk _eatingChunk;
   Chunk _collisionChunk;
+
 };
 
 #endif
