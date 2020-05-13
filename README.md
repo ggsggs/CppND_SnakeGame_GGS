@@ -1,5 +1,4 @@
 # CPPND: Capstone Snake Game Example
-
 This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The code for this repo was inspired by [this](https://codereview.stackexchange.com/questions/212296/snake-game-in-c-with-sdl) excellent StackOverflow post and set of responses.
 
 <img src="snake_game.gif"/>
@@ -29,3 +28,19 @@ In this project, you can build your own C++ application or extend this Snake gam
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./SnakeGame`.
+
+## TODO
+- [ ] Use modern C++.
+- [ ] Add background music.
+- [ ] Add food pick-up sound.
+- [ ] Add collision sound.
+- [ ] Add Game-Over music.
+- [ ] Add background image.
+- [ ] Add tail to snake.
+- [ ] Add texture to Snake's body.
+- [ ] Show score text texture after game over.
+- [ ] Allow restart game after game over.
+- [ ] Simple menu.
+- [ ] Set difficulty.
+- [ ] Keep scores.
+- [ ] Save custom name with every score.
