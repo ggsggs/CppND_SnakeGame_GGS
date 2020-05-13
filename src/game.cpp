@@ -1,6 +1,7 @@
 #include "game.h"
 #include <iostream>
 #include "SDL.h"
+#include "soundplayer.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height),
@@ -19,6 +20,8 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   int frame_count = 0;
   bool running = true;
 
+  SoundPlayer soundPlayer;
+  soundPlayer.PlayBackgroundMusic();
   while (running) {
     frame_start = SDL_GetTicks();
 

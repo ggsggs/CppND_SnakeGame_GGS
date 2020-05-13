@@ -30,16 +30,18 @@ In this project, you can build your own C++ application or extend this Snake gam
 4. Run it: `./SnakeGame`.
 
 ## TODO
+
 - [x] Remove hex colors from function calls
   - [x] Create color class
   - [x] Wrap SDL_SetRenderDrawColor
   - [x] Create basic color palette.
 - [x] Use modern C++.
   - [x] Use smart pointers.
-- [ ] Add background music.
-- [ ] Add food pick-up sound.
-- [ ] Add collision sound.
-- [ ] Add Game-Over music.
+- [ ] Add sounds to game.
+  - [x] Add background music.
+  - [ ] Add food pick-up sound.
+  - [ ] Add collision sound.
+  - [ ] Add Game-Over music.
 - [ ] Add background image.
 - [ ] Add tail to snake.
 - [ ] Add food vanish functionality.
