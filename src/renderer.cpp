@@ -16,9 +16,9 @@ Renderer::Renderer(const std::size_t screen_width,
   }
 
   // Create Window
-  sdl_window = SDL_CreateWindow("Snake Game", SDL_WINDOWPOS_CENTERED,
+  sdl_window.reset(SDL_CreateWindow("Snake Game", SDL_WINDOWPOS_CENTERED,
                                 SDL_WINDOWPOS_CENTERED, screen_width,
-                                screen_height, SDL_WINDOW_SHOWN);
+                                screen_height, SDL_WINDOW_SHOWN));
 
   if (nullptr == sdl_window) {
     std::cerr << "Window could not be created.\n";
@@ -26,7 +26,8 @@ Renderer::Renderer(const std::size_t screen_width,
   }
 
   // Create renderer
-  sdl_renderer = SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_ACCELERATED);
+  sdl_renderer.reset(
+    SDL_CreateRenderer(sdl_window.get(), -1, SDL_RENDERER_ACCELERATED));
   if (nullptr == sdl_renderer) {
     std::cerr << "Renderer could not be created.\n";
     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
@@ -34,7 +35,9 @@ Renderer::Renderer(const std::size_t screen_width,
 }
 
 Renderer::~Renderer() {
-  SDL_DestroyWindow(sdl_window);
+  // no need to call destroy window, when unique ptr goes out of scope it will
+  // call destroy window.
+  // SDL_DestroyWindow(sdl_window);
   SDL_Quit();
 }
 
@@ -45,20 +48,20 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
 
   // Clear screen
   ChangeDrawColor(Palette::background);
-  SDL_RenderClear(sdl_renderer);
+  SDL_RenderClear(sdl_renderer.get());
 
   // Render food
   ChangeDrawColor(Palette::food);
   block.x = food.x * block.w;
   block.y = food.y * block.h;
-  SDL_RenderFillRect(sdl_renderer, &block);
+  SDL_RenderFillRect(sdl_renderer.get(), &block);
 
   // Render snake's body
   ChangeDrawColor(Palette::snake_body);
   for (SDL_Point const &point : snake.body) {
     block.x = point.x * block.w;
     block.y = point.y * block.h;
-    SDL_RenderFillRect(sdl_renderer, &block);
+    SDL_RenderFillRect(sdl_renderer.get(), &block);
   }
 
   // Render snake's head
@@ -69,17 +72,17 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
   } else {
     ChangeDrawColor(Palette::snake_head_dead);
   }
-  SDL_RenderFillRect(sdl_renderer, &block);
+  SDL_RenderFillRect(sdl_renderer.get(), &block);
 
   // Update Screen
-  SDL_RenderPresent(sdl_renderer);
+  SDL_RenderPresent(sdl_renderer.get());
 }
 
 void Renderer::UpdateWindowTitle(int score, int fps) {
   std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};
-  SDL_SetWindowTitle(sdl_window, title.c_str());
+  SDL_SetWindowTitle(sdl_window.get(), title.c_str());
 }
 
 void Renderer::ChangeDrawColor(Color c){
-  SDL_SetRenderDrawColor(sdl_renderer, c.r, c.g, c.b, c.alpha);
+  SDL_SetRenderDrawColor(sdl_renderer.get(), c.r, c.g, c.b, c.alpha);
 }

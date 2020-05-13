@@ -4,6 +4,7 @@
 #include <vector>
 #include "SDL.h"
 #include "snake.h"
+#include <memory>
 
 class Color {
  public:
@@ -24,9 +25,32 @@ class Renderer {
   void Render(Snake const snake, SDL_Point const &food);
   void UpdateWindowTitle(int score, int fps);
   void ChangeDrawColor(Color RGBAlpha_color);
+
  private:
-  SDL_Window *sdl_window;
-  SDL_Renderer *sdl_renderer;
+  struct SDLWindowDestroyer                                                       
+  {                                                                               
+    void operator()(SDL_Window* w) const                                        
+    {                                                                           
+        SDL_DestroyWindow(w);                                                   
+    }                                                                           
+  };         
+  struct SDLRendererDestroyer                                                       
+  {                                                                               
+    void operator()(SDL_Renderer* r) const                                        
+    {                                                                           
+        SDL_DestroyRenderer(r);                                                   
+    }                                                                           
+  };         
+  struct SDLSurfaceDestroyer{                                                     
+    void operator()(SDL_Surface* s) const                                       
+    {                                                                           
+        SDL_FreeSurface(s);                                                     
+    }                                                                           
+  };     
+
+ private:
+  std::unique_ptr<SDL_Window, SDLWindowDestroyer> sdl_window;
+  std::unique_ptr<SDL_Renderer, SDLRendererDestroyer> sdl_renderer;
 
   const std::size_t screen_width;
   const std::size_t screen_height;
