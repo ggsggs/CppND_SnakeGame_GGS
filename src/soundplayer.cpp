@@ -5,7 +5,8 @@ bool SoundPlayer::_isAudioInit =
  Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) >= 0;
 
 SoundPlayer::SoundPlayer() : 
-  _backgroundSong(path_BackgroundSong), _eatingChunk(path_eatingChunk) {
+  _backgroundSong(path_BackgroundSong), _eatingChunk(path_eatingChunk),
+  _collisionChunk(path_collisionChunk) {
   if (!_isAudioInit) {
     printf("Error initializing SDL2_mixer: %s\n", Mix_GetError());
   }
@@ -25,6 +26,9 @@ void SoundPlayer::HaltBackgroundMusic() {
 
 void SoundPlayer::PlayEatingChunk() {
   _eatingChunk.PlayChunk();
+}
+void SoundPlayer::PlayCollisionChunk(){
+  _collisionChunk.PlayChunk();
 }
 SoundPlayer::Song::Song(std::string path) {
   _mix_music.reset(Mix_LoadMUS(path.c_str()));

@@ -11,6 +11,7 @@
 const std::string path_BackgroundSong{"../media/snake_jazz.wav"};
 const std::string path_GameOverSong{"../media/game_over.wav"};
 const std::string path_eatingChunk{"../media/success.wav"};
+const std::string path_collisionChunk{"../media/wrong_buzzer.wav"};
 
 class SoundPlayer{
  public:
@@ -19,6 +20,7 @@ class SoundPlayer{
   void PlayBackgroundMusic();
   void HaltBackgroundMusic();
   void PlayEatingChunk();
+  void PlayCollisionChunk();
 
  private:
   class Song{
@@ -57,6 +59,7 @@ class SoundPlayer{
   static bool _isAudioInit;
   Song _backgroundSong;
   Chunk _eatingChunk;
+  Chunk _collisionChunk;
 };
 
 #endif

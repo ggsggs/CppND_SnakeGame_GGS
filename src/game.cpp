@@ -50,6 +50,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
       SDL_Delay(target_frame_duration - frame_duration);
     }
   }
+  //_soundPlayer.PlayCollisionChunk();
 }
 
 void Game::PlaceFood() {
@@ -68,7 +69,14 @@ void Game::PlaceFood() {
 }
 
 void Game::Update() {
-  if (!snake.alive) return;
+  static bool noCollision = true;
+  if (!snake.alive){
+    if (noCollision) {
+      _soundPlayer.PlayCollisionChunk();
+      noCollision = false;
+    }
+    return;
+  } 
 
   snake.Update();
 
