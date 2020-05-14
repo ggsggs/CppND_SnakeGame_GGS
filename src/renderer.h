@@ -7,6 +7,7 @@
 #include "color.h"
 #include <memory>
 
+#include "texture.h"
 
 class Renderer {
  public:
@@ -49,6 +50,9 @@ class Renderer {
   const std::size_t screen_height;
   const std::size_t grid_width;
   const std::size_t grid_height;
+
+  ImgTexture _background;
 };
 
+const std::string kPathToBackgroundImg{"../media/sand.jpg"};
 #endif

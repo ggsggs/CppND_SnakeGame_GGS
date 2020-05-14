@@ -11,7 +11,8 @@ Renderer::Renderer(const std::size_t screen_width,
     : screen_width(screen_width),
       screen_height(screen_height),
       grid_width(grid_width),
-      grid_height(grid_height) {
+      grid_height(grid_height),
+      _background() {
   // Initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     std::cerr << "SDL could not initialize.\n";
@@ -35,6 +36,7 @@ Renderer::Renderer(const std::size_t screen_width,
     std::cerr << "Renderer could not be created.\n";
     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
   }
+  _background.LoadFromFile(sdl_renderer.get(), kPathToBackgroundImg);
 }
 
 Renderer::~Renderer() {
@@ -53,9 +55,7 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
   ChangeDrawColor(Palette::background);
   SDL_RenderClear(sdl_renderer.get());
 
-  Texture background(*this);
-  background.loadFromFile("../media/sand.jpg");
-  background.render(0, 0);
+  _background.RenderSameSizeAt(this->get(), 0, 0);
 
   // Render food
   ChangeDrawColor(Palette::food);
