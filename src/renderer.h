@@ -55,12 +55,15 @@ class Renderer {
   ImgTexture _snakeHead;
   ImgTexture _snakeTail;
   ImgTexture _food;
+  TextTexture _text;
 };
 
 const std::string kPathToBackgroundImg{"../media/sand.jpg"};
 const std::string kPathToSnakeHeadImg{"../media/snake_head.png"};
 const std::string kPathToSnakeTailImg{"../media/snake_tail.png"};
 const std::string kPathToFoodImg{"../media/apple.png"};
+const std::string kPathToFont{"../media/get_schwifty.ttf"};
 
+const int kFontSize{100};
 double DirectionToDegrees(Snake::Direction d);
 #endif

@@ -65,6 +65,9 @@ Renderer::Renderer(const std::size_t screen_width,
   _snakeTail.LoadFromFile(sdl_renderer.get(), kPathToSnakeTailImg, 
     &Palette::white);
   _food.LoadFromFile(sdl_renderer.get(), kPathToFoodImg, &Palette::white);
+
+  _text.LoadFont(kPathToFont, kFontSize);
+  _text.LoadFromText(sdl_renderer.get(), "GAME-OVER", Palette::white);
 }
 
 Renderer::~Renderer() {
@@ -124,6 +127,16 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
   
   _snakeHead.Render(this->get(), &block, nullptr, degrees);
   // SDL_RenderFillRect(sdl_renderer.get(), &block);
+
+  if (!snake.alive){
+  SDL_Rect boxGameOver{
+    static_cast<int>(screen_width)/4,
+    static_cast<int>(screen_height)/4,
+    static_cast<int>(screen_width)*2/4,
+    static_cast<int>(screen_height)*2/4
+  };
+  _text.Render(this->get(), &boxGameOver);
+  } 
 
   // Update Screen
   SDL_RenderPresent(sdl_renderer.get());

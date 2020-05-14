@@ -49,6 +49,8 @@ In this project, you can build your own C++ application or extend this Snake gam
 - [x] Add snake head image. (+ rotate accordingly)
 - [x] Add snake tail image. (+ rotate accordingly)
 - [ ] Add texture to Snake's body.
+- [x] Use image to generate food
+- [x] Show Game-over.
 - [ ] Show score text texture after game over.
 - [ ] Allow restart game after game over.
 - [ ] Simple menu.
