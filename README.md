@@ -5,6 +5,7 @@ For the Capstone project in the [Udacity C++ Nanodegree Program](https://www.uda
 Some new game features have been added to the original project repository. A TODO list can be found at the end of this doc.
 
 Graphical results of the game modification can be seen below. Audio has also been added for special game events, as well as different background music.
+
 <img src="snake_game.gif"/>
 
 ## File and class structure
