@@ -74,6 +74,9 @@ Renderer::~Renderer() {
   // no need to call destroy window, when unique ptr goes out of scope it will
   // call destroy window.
   // SDL_DestroyWindow(sdl_window);
+  IMG_Quit();
+  _text.~TextTexture();
+  TTF_Quit();
   SDL_Quit();
 }
 
