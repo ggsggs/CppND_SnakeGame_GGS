@@ -71,6 +71,14 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
     SDL_RenderFillRect(sdl_renderer.get(), &block);
   }
 
+  // Render snake's tail
+  if (!snake.body.empty()) {
+    ChangeDrawColor(Palette::snake_tail);
+    block.x = snake.body.begin()->x * block.w;
+    block.y = snake.body.begin()->y * block.h;
+    SDL_RenderFillRect(sdl_renderer.get(), &block);
+  }
+
   // Render snake's head
   block.x = static_cast<int>(snake.head_x) * block.w;
   block.y = static_cast<int>(snake.head_y) * block.h;
