@@ -54,11 +54,13 @@ class Renderer {
   ImgTexture _background;
   ImgTexture _snakeHead;
   ImgTexture _snakeTail;
+  ImgTexture _food;
 };
 
 const std::string kPathToBackgroundImg{"../media/sand.jpg"};
 const std::string kPathToSnakeHeadImg{"../media/snake_head.png"};
 const std::string kPathToSnakeTailImg{"../media/snake_tail.png"};
+const std::string kPathToFoodImg{"../media/apple.png"};
 
 double DirectionToDegrees(Snake::Direction d);
 #endif

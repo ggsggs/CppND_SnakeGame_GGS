@@ -34,8 +34,8 @@ Renderer::Renderer(const std::size_t screen_width,
     : screen_width(screen_width),
       screen_height(screen_height),
       grid_width(grid_width),
-      grid_height(grid_height),
-      _background() {
+      grid_height(grid_height)
+      {
   // Initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     std::cerr << "SDL could not initialize.\n";
@@ -64,6 +64,7 @@ Renderer::Renderer(const std::size_t screen_width,
     &Palette::white);
   _snakeTail.LoadFromFile(sdl_renderer.get(), kPathToSnakeTailImg, 
     &Palette::white);
+  _food.LoadFromFile(sdl_renderer.get(), kPathToFoodImg, &Palette::white);
 }
 
 Renderer::~Renderer() {
@@ -85,10 +86,9 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
   _background.RenderSameSizeAt(this->get(), 0, 0);
 
   // Render food
-  ChangeDrawColor(Palette::food);
   block.x = food.x * block.w;
   block.y = food.y * block.h;
-  SDL_RenderFillRect(sdl_renderer.get(), &block);
+  _food.Render(this->get(), &block);
 
   // Render snake's body
   ChangeDrawColor(Palette::snake_body);
