@@ -38,7 +38,7 @@ In this project, you can build your own C++ application or extend this Snake gam
   - [x] Create basic color palette.
 - [x] Use modern C++.
   - [x] Use smart pointers.
-- [ ] Add sounds to game.
+- [x] Add sounds to game.
   - [x] Add background music.
   - [x] Add food pick-up sound.
   - [x] Add collision sound.
@@ -46,6 +46,8 @@ In this project, you can build your own C++ application or extend this Snake gam
 - [x] Add background image.
 - [x] Add tail to snake.
 - [ ] Add food vanish functionality.
+- [x] Add snake head image. (+ rotate accordingly)
+- [x] Add snake tail image. (+ rotate accordingly)
 - [ ] Add texture to Snake's body.
 - [ ] Show score text texture after game over.
 - [ ] Allow restart game after game over.

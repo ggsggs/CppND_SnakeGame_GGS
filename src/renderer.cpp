@@ -4,6 +4,29 @@
 
 #include "texture.h"
 #include "color.h"
+#include "snake.h"
+
+double DirectionToDegrees(Snake::Direction d){
+  double degrees;
+  switch (d)
+  {
+  case Snake::Direction::kUp:
+    degrees = 0;
+    break;
+  case Snake::Direction::kRight:
+    degrees = 90;
+    break;
+
+  case Snake::Direction::kDown:
+    degrees = 180;
+    break;
+
+  case Snake::Direction::kLeft:
+    degrees = 270;
+    break;
+  }
+  return degrees;
+}
 
 Renderer::Renderer(const std::size_t screen_width,
                    const std::size_t screen_height,
@@ -37,7 +60,9 @@ Renderer::Renderer(const std::size_t screen_width,
     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
   }
   _background.LoadFromFile(sdl_renderer.get(), kPathToBackgroundImg);
-  _snakeHead.LoadFromFile(sdl_renderer.get(), "../media/snake_head.png",
+  _snakeHead.LoadFromFile(sdl_renderer.get(), kPathToSnakeHeadImg,
+    &Palette::white);
+  _snakeTail.LoadFromFile(sdl_renderer.get(), kPathToSnakeTailImg, 
     &Palette::white);
 }
 
@@ -67,7 +92,12 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
 
   // Render snake's body
   ChangeDrawColor(Palette::snake_body);
+  bool is_tail = true;
   for (SDL_Point const &point : snake.body) {
+    if (is_tail) {
+      is_tail = false;
+      continue;
+    }
     block.x = point.x * block.w;
     block.y = point.y * block.h;
     SDL_RenderFillRect(sdl_renderer.get(), &block);
@@ -75,10 +105,11 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
 
   // Render snake's tail
   if (!snake.body.empty()) {
-    ChangeDrawColor(Palette::snake_tail);
     block.x = snake.body.begin()->x * block.w;
     block.y = snake.body.begin()->y * block.h;
-    SDL_RenderFillRect(sdl_renderer.get(), &block);
+
+    double degrees = DirectionToDegrees(snake.dequeDirections.back());
+    _snakeTail.Render(this->get(), &block, nullptr, degrees);
   }
 
   // Render snake's head
@@ -89,24 +120,7 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
   } else {
     ChangeDrawColor(Palette::snake_head_dead);
   }
-  double degrees;
-  switch (snake.direction)
-  {
-  case Snake::Direction::kUp:
-    degrees = 0;
-    break;
-  case Snake::Direction::kRight:
-    degrees = 90;
-    break;
-
-  case Snake::Direction::kDown:
-    degrees = 180;
-    break;
-
-  case Snake::Direction::kLeft:
-    degrees = 270;
-    break;
-  }
+  double degrees = DirectionToDegrees(snake.direction);
   
   _snakeHead.Render(this->get(), &block, nullptr, degrees);
   // SDL_RenderFillRect(sdl_renderer.get(), &block);

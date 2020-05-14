@@ -46,10 +46,11 @@ void Snake::UpdateHead() {
 void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) {
   // Add previous head location to vector
   body.push_back(prev_head_cell);
-
+  dequeDirections.push_front(direction);
   if (!growing) {
     // Remove the tail from the vector.
     body.erase(body.begin());
+    dequeDirections.pop_back();
   } else {
     growing = false;
     size++;

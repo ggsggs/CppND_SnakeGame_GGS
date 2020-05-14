@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "SDL.h"
+#include <deque>
 
 class Snake {
  public:
@@ -20,7 +21,7 @@ class Snake {
   bool SnakeCell(int x, int y);
 
   Direction direction = Direction::kUp;
-
+  std::deque<Direction> dequeDirections; 
   float speed{0.1f};
   int size{1};
   bool alive{true};
