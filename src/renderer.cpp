@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 
+#include "texture.h"
+#include "color.h"
+
 Renderer::Renderer(const std::size_t screen_width,
                    const std::size_t screen_height,
                    const std::size_t grid_width, const std::size_t grid_height)
@@ -49,6 +52,10 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
   // Clear screen
   ChangeDrawColor(Palette::background);
   SDL_RenderClear(sdl_renderer.get());
+
+  Texture background(*this);
+  background.loadFromFile("../media/sand.jpg");
+  background.render(0, 0);
 
   // Render food
   ChangeDrawColor(Palette::food);
