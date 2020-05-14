@@ -55,9 +55,9 @@ The Rubric contains multiple criteria. Only a selection of the criteria have bee
   * To install these in Ubuntu:
 
   ```shell
-  sudo apt-get libsdl2-image-dev
-  sudo apt-get libsdl2-mixer-dev
-  sudo apt-get libsdl2-ttf-dev
+  sudo apt-get install libsdl2-image-dev
+  sudo apt-get install libsdl2-mixer-dev
+  sudo apt-get install libsdl2-ttf-dev
   ``` 
 
 * gcc/g++ >= 5.4
