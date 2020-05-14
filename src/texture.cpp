@@ -40,7 +40,7 @@ ImgTexture::ImgTexture() {}
 ImgTexture::~ImgTexture() {}
 
 bool ImgTexture::LoadFromFile(SDL_Renderer* renderer, std::string path,
-  Color* const colorKey) {
+  const Color* colorKey) {
   // Load image at specified path
   // Following LazyFoo's method to obtain texture from file.
   SDL_Surface *loadedSurface = IMG_Load(path.c_str());

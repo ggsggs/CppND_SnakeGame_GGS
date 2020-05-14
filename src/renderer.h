@@ -52,6 +52,7 @@ class Renderer {
   const std::size_t grid_height;
 
   ImgTexture _background;
+  ImgTexture _snakeHead;
 };
 
 const std::string kPathToBackgroundImg{"../media/sand.jpg"};

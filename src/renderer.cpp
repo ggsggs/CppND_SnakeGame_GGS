@@ -37,6 +37,8 @@ Renderer::Renderer(const std::size_t screen_width,
     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
   }
   _background.LoadFromFile(sdl_renderer.get(), kPathToBackgroundImg);
+  _snakeHead.LoadFromFile(sdl_renderer.get(), "../media/snake_head.png",
+    &Palette::white);
 }
 
 Renderer::~Renderer() {
@@ -87,7 +89,27 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
   } else {
     ChangeDrawColor(Palette::snake_head_dead);
   }
-  SDL_RenderFillRect(sdl_renderer.get(), &block);
+  double degrees;
+  switch (snake.direction)
+  {
+  case Snake::Direction::kUp:
+    degrees = 0;
+    break;
+  case Snake::Direction::kRight:
+    degrees = 90;
+    break;
+
+  case Snake::Direction::kDown:
+    degrees = 180;
+    break;
+
+  case Snake::Direction::kLeft:
+    degrees = 270;
+    break;
+  }
+  
+  _snakeHead.Render(this->get(), &block, nullptr, degrees);
+  // SDL_RenderFillRect(sdl_renderer.get(), &block);
 
   // Update Screen
   SDL_RenderPresent(sdl_renderer.get());

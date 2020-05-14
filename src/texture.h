@@ -42,7 +42,7 @@ class ImgTexture : public Texture{
   ImgTexture();
   ~ImgTexture();
   bool LoadFromFile(SDL_Renderer* renderer, std::string pathToImg,
-    Color* const colorKey = nullptr);
+    const Color* colorKey = nullptr);
 };  
 
 #endif
