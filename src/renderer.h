@@ -25,6 +25,7 @@ class Renderer {
   void Render(Snake const snake, SDL_Point const &food);
   void UpdateWindowTitle(int score, int fps);
   void ChangeDrawColor(Color RGBAlpha_color);
+  SDL_Renderer* get(){return sdl_renderer.get();}
 
  private:
   struct SDLWindowDestroyer                                                       
