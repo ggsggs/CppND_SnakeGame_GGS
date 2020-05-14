@@ -16,5 +16,7 @@ include_directories(${SDL2_INCLUDE_DIRS} src)
 include_directories(${SDL2_IMAGE_DIRS})
 include_directories(${SDL2_MIXER_DIRS})
 
-add_executable(${PROJECT_NAME} src/main.cpp src/game.cpp src/controller.cpp src/renderer.cpp src/snake.cpp src/soundplayer.cpp)
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_MIXER_LIBRARIES})
+add_executable(${PROJECT_NAME} src/main.cpp src/game.cpp src/controller.cpp
+ src/renderer.cpp src/snake.cpp src/soundplayer.cpp src/texture.cpp)
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES}
+ ${SDL2_MIXER_LIBRARIES} ${SDL2_IMAGE_LIBRARIES}) 
