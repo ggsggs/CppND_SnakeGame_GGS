@@ -39,7 +39,8 @@ ImgTexture::ImgTexture() {}
 
 ImgTexture::~ImgTexture() {}
 
-bool ImgTexture::LoadFromFile(SDL_Renderer* renderer, std::string path) {
+bool ImgTexture::LoadFromFile(SDL_Renderer* renderer, std::string path,
+  Color* const colorKey) {
   // Load image at specified path
   // Following LazyFoo's method to obtain texture from file.
   SDL_Surface *loadedSurface = IMG_Load(path.c_str());
@@ -47,6 +48,11 @@ bool ImgTexture::LoadFromFile(SDL_Renderer* renderer, std::string path) {
     printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(),
            IMG_GetError());
   } else {
+    if (colorKey != nullptr){
+      SDL_SetColorKey( loadedSurface, SDL_TRUE, 
+        SDL_MapRGB(loadedSurface->format,
+          colorKey->r, colorKey->b, colorKey->g));
+    }
     // texture from surface
     _texture.reset(
         SDL_CreateTextureFromSurface(renderer, loadedSurface));
