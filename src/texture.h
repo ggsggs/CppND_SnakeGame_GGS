@@ -54,14 +54,12 @@ class TextTexture : public Texture {
 public:
   TextTexture();
   ~TextTexture();
-  bool LoadFromText(SDL_Renderer* renderer, std::string text, Color color);
+  bool LoadFromText(SDL_Renderer *renderer, std::string text, Color color);
   bool LoadFont(std::string pathToFont, int Psize = 24);
 
 private:
-  struct DestroyerFont{
-    void operator()(TTF_Font* f){
-      TTF_CloseFont(f);
-    }
+  struct DestroyerFont {
+    void operator()(TTF_Font *f) { TTF_CloseFont(f); }
   };
   std::unique_ptr<TTF_Font, DestroyerFont> _font;
   static const bool _isTTF_Init;

@@ -1,16 +1,16 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <vector>
 #include "SDL.h"
-#include "snake.h"
 #include "color.h"
+#include "snake.h"
 #include <memory>
+#include <vector>
 
 #include "texture.h"
 
 class Renderer {
- public:
+public:
   Renderer(const std::size_t screen_width, const std::size_t screen_height,
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
@@ -18,31 +18,20 @@ class Renderer {
   void Render(Snake const snake, SDL_Point const &food);
   void UpdateWindowTitle(int score, int fps);
   void ChangeDrawColor(Color RGBAlpha_color);
-  SDL_Renderer* get(){return sdl_renderer.get();}
+  SDL_Renderer *get() { return sdl_renderer.get(); }
 
- private:
-  struct SDLWindowDestroyer                                                       
-  {                                                                               
-    void operator()(SDL_Window* w) const                                        
-    {                                                                           
-        SDL_DestroyWindow(w);                                                   
-    }                                                                           
-  };         
-  struct SDLRendererDestroyer                                                       
-  {                                                                               
-    void operator()(SDL_Renderer* r) const                                        
-    {                                                                           
-        SDL_DestroyRenderer(r);                                                   
-    }                                                                           
-  };         
-  struct SDLSurfaceDestroyer{                                                     
-    void operator()(SDL_Surface* s) const                                       
-    {                                                                           
-        SDL_FreeSurface(s);                                                     
-    }                                                                           
-  };     
+private:
+  struct SDLWindowDestroyer {
+    void operator()(SDL_Window *w) const { SDL_DestroyWindow(w); }
+  };
+  struct SDLRendererDestroyer {
+    void operator()(SDL_Renderer *r) const { SDL_DestroyRenderer(r); }
+  };
+  struct SDLSurfaceDestroyer {
+    void operator()(SDL_Surface *s) const { SDL_FreeSurface(s); }
+  };
 
- private:
+private:
   std::unique_ptr<SDL_Window, SDLWindowDestroyer> sdl_window;
   std::unique_ptr<SDL_Renderer, SDLRendererDestroyer> sdl_renderer;
 

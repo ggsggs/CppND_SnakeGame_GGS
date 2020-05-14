@@ -1,11 +1,10 @@
 #include "game.h"
-#include <iostream>
 #include "SDL.h"
 #include "soundplayer.h"
+#include <iostream>
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height),
-      engine(dev()),
+    : snake(grid_width, grid_height), engine(dev()),
       random_w(0, static_cast<int>(grid_width) - 1),
       random_h(0, static_cast<int>(grid_height) - 1) {
   PlaceFood();
@@ -50,7 +49,6 @@ void Game::Run(Controller const &controller, Renderer &renderer,
       SDL_Delay(target_frame_duration - frame_duration);
     }
   }
-  //_soundPlayer.PlayCollisionChunk();
 }
 
 void Game::PlaceFood() {
@@ -70,14 +68,14 @@ void Game::PlaceFood() {
 
 void Game::Update() {
   static bool noCollision = true;
-  if (!snake.alive){
+  if (!snake.alive) {
     if (noCollision) {
       _soundPlayer.PlayCollisionChunk();
       _soundPlayer.PlayGameOverMusic();
       noCollision = false;
     }
     return;
-  } 
+  }
 
   snake.Update();
 
@@ -86,7 +84,7 @@ void Game::Update() {
 
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
-    _soundPlayer.PlayEatingChunk(); 
+    _soundPlayer.PlayEatingChunk();
     score++;
     PlaceFood();
     // Grow snake and increase speed.

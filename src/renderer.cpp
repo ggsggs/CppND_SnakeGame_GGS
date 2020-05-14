@@ -2,14 +2,13 @@
 #include <iostream>
 #include <string>
 
-#include "texture.h"
 #include "color.h"
 #include "snake.h"
+#include "texture.h"
 
-double DirectionToDegrees(Snake::Direction d){
+double DirectionToDegrees(Snake::Direction d) {
   double degrees;
-  switch (d)
-  {
+  switch (d) {
   case Snake::Direction::kUp:
     degrees = 0;
     break;
@@ -31,11 +30,8 @@ double DirectionToDegrees(Snake::Direction d){
 Renderer::Renderer(const std::size_t screen_width,
                    const std::size_t screen_height,
                    const std::size_t grid_width, const std::size_t grid_height)
-    : screen_width(screen_width),
-      screen_height(screen_height),
-      grid_width(grid_width),
-      grid_height(grid_height)
-      {
+    : screen_width(screen_width), screen_height(screen_height),
+      grid_width(grid_width), grid_height(grid_height) {
   // Initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     std::cerr << "SDL could not initialize.\n";
@@ -44,8 +40,8 @@ Renderer::Renderer(const std::size_t screen_width,
 
   // Create Window
   sdl_window.reset(SDL_CreateWindow("Snake Game", SDL_WINDOWPOS_CENTERED,
-                                SDL_WINDOWPOS_CENTERED, screen_width,
-                                screen_height, SDL_WINDOW_SHOWN));
+                                    SDL_WINDOWPOS_CENTERED, screen_width,
+                                    screen_height, SDL_WINDOW_SHOWN));
 
   if (nullptr == sdl_window) {
     std::cerr << "Window could not be created.\n";
@@ -54,16 +50,16 @@ Renderer::Renderer(const std::size_t screen_width,
 
   // Create renderer
   sdl_renderer.reset(
-    SDL_CreateRenderer(sdl_window.get(), -1, SDL_RENDERER_ACCELERATED));
+      SDL_CreateRenderer(sdl_window.get(), -1, SDL_RENDERER_ACCELERATED));
   if (nullptr == sdl_renderer) {
     std::cerr << "Renderer could not be created.\n";
     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
   }
   _background.LoadFromFile(sdl_renderer.get(), kPathToBackgroundImg);
   _snakeHead.LoadFromFile(sdl_renderer.get(), kPathToSnakeHeadImg,
-    &Palette::white);
-  _snakeTail.LoadFromFile(sdl_renderer.get(), kPathToSnakeTailImg, 
-    &Palette::white);
+                          &Palette::white);
+  _snakeTail.LoadFromFile(sdl_renderer.get(), kPathToSnakeTailImg,
+                          &Palette::white);
   _food.LoadFromFile(sdl_renderer.get(), kPathToFoodImg, &Palette::white);
 
   _text.LoadFont(kPathToFont, kFontSize);
@@ -127,29 +123,28 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
     ChangeDrawColor(Palette::snake_head_dead);
   }
   double degrees = DirectionToDegrees(snake.direction);
-  
+
   _snakeHead.Render(this->get(), &block, nullptr, degrees);
   // SDL_RenderFillRect(sdl_renderer.get(), &block);
 
-  if (!snake.alive){
-  SDL_Rect boxGameOver{
-    static_cast<int>(screen_width)/4,
-    static_cast<int>(screen_height)/4,
-    static_cast<int>(screen_width)*2/4,
-    static_cast<int>(screen_height)*2/4
-  };
-  _text.Render(this->get(), &boxGameOver);
-  } 
+  if (!snake.alive) {
+    SDL_Rect boxGameOver{static_cast<int>(screen_width) / 4,
+                         static_cast<int>(screen_height) / 4,
+                         static_cast<int>(screen_width) * 2 / 4,
+                         static_cast<int>(screen_height) * 2 / 4};
+    _text.Render(this->get(), &boxGameOver);
+  }
 
   // Update Screen
   SDL_RenderPresent(sdl_renderer.get());
 }
 
 void Renderer::UpdateWindowTitle(int score, int fps) {
-  std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};
+  std::string title{"Snake Score: " + std::to_string(score) +
+                    " FPS: " + std::to_string(fps)};
   SDL_SetWindowTitle(sdl_window.get(), title.c_str());
 }
 
-void Renderer::ChangeDrawColor(Color c){
+void Renderer::ChangeDrawColor(Color c) {
   SDL_SetRenderDrawColor(sdl_renderer.get(), c.r, c.g, c.b, c.alpha);
 }
